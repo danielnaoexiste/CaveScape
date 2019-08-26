@@ -17,7 +17,14 @@ _global_script_class_icons={
 
 config/name="CGJ"
 run/main_scene="res://World.tscn"
+boot_splash/image="res://ART/i_G8x_.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.156863, 0.176471, 0.203922, 1 )
 config/icon="res://icon.png"
+
+[autoload]
+
+MusicSingleton="*res://SCENES/MusicSingleton.tscn"
 
 [display]
 
