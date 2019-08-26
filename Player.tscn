@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://ART/CHAR/char_jump.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://EFFECTS/grad.png" type="Texture" id=12]
 [ext_resource path="res://SFX/Walk.wav" type="AudioStream" id=13]
 [ext_resource path="res://SFX/Jump.wav" type="AudioStream" id=14]
+[ext_resource path="res://SFX/PowerUp.wav" type="AudioStream" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -79,4 +80,9 @@ volume_db = -1.0
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 14 )
 volume_db = -8.0
+
+[node name="PowerUpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
+volume_db = -2.0
+attenuation = 0.329877
 [connection signal="timeout" from="StepTimer" to="." method="_on_StepTimer_timeout"]

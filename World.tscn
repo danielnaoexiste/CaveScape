@@ -1,8 +1,11 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ART/TileSet.png" type="Texture" id=2]
 [ext_resource path="res://ART/Atlas.png" type="Texture" id=3]
+[ext_resource path="res://Props/DjOrb.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Props/Screen Text.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Props/Chest.tscn" type="PackedScene" id=6]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -196,15 +199,12 @@ polygon = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 [sub_resource type="ConvexPolygonShape2D" id=32]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 
-[sub_resource type="ConvexPolygonShape2D" id=33]
-points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
-
-[sub_resource type="TileSet" id=34]
+[sub_resource type="TileSet" id=33]
 0/name = "Atlas.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 33, 18 )
+0/region = Rect2( 0, 8, 16, 9 )
 0/tile_mode = 2
 0/autotile/icon_coordinate = Vector2( 0, 1 )
 0/autotile/tile_size = Vector2( 8, 8 )
@@ -215,16 +215,10 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shapes = [ {
-"autotile_coord": Vector2( 1, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 32 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
 "autotile_coord": Vector2( 2, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 33 ),
+"shape": SubResource( 32 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = -1
@@ -244,7 +238,16 @@ tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 1, -65535, 0, 1, -65534, 0, 1, -6
 [node name="Atlas" type="TileMap" parent="." groups=[
 "Damage",
 ]]
-tile_set = SubResource( 34 )
+editor/display_folded = true
+tile_set = SubResource( 33 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 131082, 1610612736, 0, 131083, 1610612736, 0, 131084, 1610612736, 0, 131085, 1610612736, 0, 393237, -1073741824, 0, 458773, -1073741824, 0, 720904, 536870912, 65536, 720905, 0, 65537, 720906, 0, 65536, 720909, 0, 0, 720910, 0, 0 )
+tile_data = PoolIntArray( 131082, 1610612736, 0, 327704, 536870912, 0, 327705, 0, 1, 327706, 0, 0, 720903, 536870912, 0, 720904, 0, 1, 720905, 0, 0, 720906, 0, 65536 )
+
+[node name="Area2D" parent="Atlas" instance=ExtResource( 4 )]
+position = Vector2( 31, 42 )
+
+[node name="Screen Text" parent="." instance=ExtResource( 5 )]
+
+[node name="Chest" parent="." instance=ExtResource( 6 )]
+position = Vector2( 490, 88 )

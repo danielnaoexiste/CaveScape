@@ -10,6 +10,9 @@ const PUSH_SPEED = 45;
 var motion = Vector2();
 var is_alive = true;
 
+var jump_count = 0;
+var MAX_JUMP_COUNT = 1;
+
 onready var step_audio : AudioStreamPlayer2D = $StepSound;
 onready var jump_audio : AudioStreamPlayer2D = $JumpSound;
 onready var step_timer : Timer = $StepTimer;
@@ -17,7 +20,6 @@ onready var dust_scene = load("res://EFFECTS/Particles2D.tscn");
 
 func _on_StepTimer_timeout():
 	step_audio.set_pitch_scale(rand_range(0.5, 1));
-	print(step_audio.get_pitch_scale());
 	step_audio.play();
 	
 func _ready():
@@ -26,7 +28,9 @@ func _ready():
 
 func _physics_process(delta):
 	motion.y += GRAVITY;
+	
 	_get_input();
+	
 	motion = move_and_slide(motion, UP);
 	
 func _get_input():
@@ -62,12 +66,18 @@ func _get_input():
 			step_timer.set_paused(true);
 			friction = true;
 		
-		if is_on_floor():
+		
+		if jump_count < MAX_JUMP_COUNT:
 			if(Input.is_action_just_pressed("ui_jump")):
 				motion.y = JUMP_HEIGHT;
 				jump_audio.set_pitch_scale(rand_range(0.75, 1));
-				print(jump_audio.get_pitch_scale());
 				jump_audio.play();
+				jump_count += 1;
+				print(jump_count);
+		
+		if is_on_floor():
+			if motion.y >= 0:
+				jump_count = 0;
 			if friction == true:
 				motion.x = lerp(motion.x, 0, 0.2);
 		else:
