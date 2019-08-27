@@ -13,20 +13,26 @@ var is_alive = true;
 var jump_count = 0;
 var MAX_JUMP_COUNT = 1;
 
+var can_wall_jump = false;
+
+var on_ground = false;
+
 onready var step_audio : AudioStreamPlayer2D = $StepSound;
 onready var jump_audio : AudioStreamPlayer2D = $JumpSound;
 onready var step_timer : Timer = $StepTimer;
 onready var dust_scene = load("res://EFFECTS/Particles2D.tscn");
 
+# Footsteps
 func _on_StepTimer_timeout():
 	step_audio.set_pitch_scale(rand_range(0.5, 1));
 	step_audio.play();
-	
+
 func _ready():
 	step_timer.start(.35);
 	step_timer.set_paused(true);
 
 func _physics_process(delta):
+	# Gravity
 	motion.y += GRAVITY;
 	
 	_get_input();
@@ -34,6 +40,8 @@ func _physics_process(delta):
 	motion = move_and_slide(motion, UP);
 	
 func _get_input():
+
+	#Character Movement
 	var friction = false;
 	if is_alive:
 		if(Input.is_action_pressed("ui_right")):
@@ -65,27 +73,47 @@ func _get_input():
 			$AnimatedSprite.play("Idle");
 			step_timer.set_paused(true);
 			friction = true;
-		
-		
+
+		# Jump Mechanics
 		if jump_count < MAX_JUMP_COUNT:
 			if(Input.is_action_just_pressed("ui_jump")):
 				motion.y = JUMP_HEIGHT;
 				jump_audio.set_pitch_scale(rand_range(0.75, 1));
 				jump_audio.play();
+				on_ground = false;
 				jump_count += 1;
 				print(jump_count);
-		
+
+		 # Controls Double Jump
 		if is_on_floor():
+			if on_ground == false:
+				on_ground = true;
+				jump_count = MAX_JUMP_COUNT;
+
 			if motion.y >= 0:
 				jump_count = 0;
 			if friction == true:
 				motion.x = lerp(motion.x, 0, 0.2);
+
 		else:
+			if on_ground == true:
+				on_ground == false;
+				jump_count = 1;
 			if friction == true:
 				motion.x = lerp(motion.x, 0, 0.05);
 			if motion.y < 0:
 				$AnimatedSprite.play("Jump");
 			else:
+				if(is_on_wall()):
+					motion.y -= GRAVITY/1.5;
+					if(Input.is_action_just_pressed("ui_jump")):
+						motion.y = JUMP_HEIGHT/1.2;
+						if ($AnimatedSprite.flip_h):
+							motion.x = 125;
+						else:
+							motion.x = -125;
+						jump_audio.set_pitch_scale(rand_range(0.75, 1));
+						jump_audio.play();
 				$AnimatedSprite.play("Fall");
 
 func _spawn_dust(dir, x, y):
