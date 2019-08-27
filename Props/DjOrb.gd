@@ -8,5 +8,13 @@ func _physics_process(delta):
 		if body.name == "Player":
 			ScreenText.get_node("PowerUpText")._change_text("You Just Got: ");
 			body.get_node("PowerUpSound").play();
-			body.MAX_JUMP_COUNT += 1;
+			match body.n_chest:
+				0:
+					body.MAX_JUMP_COUNT += 1;
+					print("DJ");
+					body.n_chest += 1;
+				1:
+					body.can_wall_jump = true;
+					print("WJ");
+					body.n_chest += 1;
 			self.queue_free();

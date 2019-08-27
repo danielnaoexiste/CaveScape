@@ -10,6 +10,8 @@ const PUSH_SPEED = 45;
 var motion = Vector2();
 var is_alive = true;
 
+var n_chest = 0;
+
 var jump_count = 0;
 var MAX_JUMP_COUNT = 1;
 
@@ -104,16 +106,19 @@ func _get_input():
 			if motion.y < 0:
 				$AnimatedSprite.play("Jump");
 			else:
-				if(is_on_wall()):
-					motion.y -= GRAVITY/1.5;
-					if(Input.is_action_just_pressed("ui_jump")):
-						motion.y = JUMP_HEIGHT/1.2;
-						if ($AnimatedSprite.flip_h):
-							motion.x = 125;
-						else:
-							motion.x = -125;
-						jump_audio.set_pitch_scale(rand_range(0.75, 1));
-						jump_audio.play();
+				if can_wall_jump:
+					for i in get_slide_count():
+						var collision = get_slide_collision(i).get_normal();
+						if collision == Vector2(1, 0) or Vector2(-1, 0):
+							motion.y -= GRAVITY/2;
+							if(Input.is_action_just_pressed("ui_jump")):
+								motion.y = JUMP_HEIGHT/1.2;
+								if ($AnimatedSprite.flip_h):
+									motion.x = 125;
+								else:
+									motion.x = -125;
+								jump_audio.set_pitch_scale(rand_range(0.75, 1));
+								jump_audio.play();
 				$AnimatedSprite.play("Fall");
 
 func _spawn_dust(dir, x, y):

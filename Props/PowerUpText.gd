@@ -13,8 +13,11 @@ func _ready():
 	text = "";
 
 func _change_text(new_text):
-	text = new_text + get_random_item();
-	$Timer.start(2);
+	if new_text != "You just opened the Chest!":
+		text = new_text + get_random_item();
+		$Timer.start(2);
+	else:
+		text = new_text;
 
 func _on_Timer_timeout():
 	text = "";

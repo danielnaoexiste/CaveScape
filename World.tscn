@@ -278,3 +278,7 @@ rotation = -1.5755
 [node name="Spike5" parent="Spikes" instance=ExtResource( 7 )]
 position = Vector2( 157.06, 96.5717 )
 rotation = -1.5755
+
+[node name="Chest2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 375.317, 71.9342 )
+scale = Vector2( -1, 1 )
