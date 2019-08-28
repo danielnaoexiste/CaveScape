@@ -7,5 +7,7 @@ func _physics_process(delta):
 	for body in bodies:
 		if body.name == "Player":
 			body.is_alive = false;
+			body.get_node("Camera2D").get_node("ScreenShake")._start(0.3, 15, 5, 1);
+			body.motion = Vector2(0, 0);
 			body.position = spawn_point.position;
 			body.is_alive = true; 

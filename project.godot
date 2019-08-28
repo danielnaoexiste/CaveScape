@@ -26,6 +26,7 @@ config/icon="res://icon.png"
 
 MusicSingleton="*res://SCENES/MusicSingleton.tscn"
 ScreenText="*res://Props/Screen Text.tscn"
+globals="*res://globals.gd"
 
 [display]
 

@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+# Movement Variables
 const UP = Vector2(0, -1);
 const GRAVITY = 5;
 const ACCELERATION = 15;
@@ -7,16 +8,16 @@ const MAX_SPEED = 80;
 const JUMP_HEIGHT = -150;
 const PUSH_SPEED = 45;
 
+const DUCK_ACC = 10;
+const DUCK_MAXSPD = 60;
+
 var motion = Vector2();
 var is_alive = true;
 
-var n_chest = 0;
-
+# Power Up Variables
 var jump_count = 0;
-var MAX_JUMP_COUNT = 1;
 
-var can_wall_jump = false;
-
+var on_duck = false;
 var on_ground = false;
 
 onready var step_audio : AudioStreamPlayer2D = $StepSound;
@@ -47,37 +48,57 @@ func _get_input():
 	var friction = false;
 	if is_alive:
 		if(Input.is_action_pressed("ui_right")):
-			motion.x = min(motion.x + ACCELERATION, MAX_SPEED);
-			
-			$AnimatedSprite.flip_h = false;
-			$AnimatedSprite.play("Run");
-			
-			_spawn_dust(0, position.x, position.y + 8);
-			
+			if(!on_duck):
+				motion.x = min(motion.x + ACCELERATION, MAX_SPEED);
+				
+				$AnimatedSprite.flip_h = false;
+				$AnimatedSprite.play("Run");			
+			else:
+				motion.x = min(motion.x + DUCK_ACC, DUCK_MAXSPD);
+				
+				$AnimatedSprite.flip_h = false;
+				$AnimatedSprite.play("duckRun");		
 			if is_on_floor():
 				step_timer.set_paused(false);
+				_spawn_dust(0, position.x, position.y + 8);
 			else:
 				step_timer.set_paused(true);
 			
 		elif(Input.is_action_pressed("ui_left")):
-			motion.x = max(motion.x - ACCELERATION, -MAX_SPEED);
-			
-			$AnimatedSprite.flip_h = true;
-			$AnimatedSprite.play("Run");
-			
-			_spawn_dust(1, position.x, position.y + 8);
-			
+			if (!on_duck):
+				motion.x = max(motion.x - ACCELERATION, -MAX_SPEED);
+				
+				$AnimatedSprite.flip_h = true;
+				$AnimatedSprite.play("Run");
+			else: 
+				motion.x = max(motion.x - DUCK_ACC, -DUCK_MAXSPD);
+				
+				$AnimatedSprite.flip_h = true;
+				$AnimatedSprite.play("duckRun");
 			if is_on_floor():
 				step_timer.set_paused(false);
+				_spawn_dust(1, position.x, position.y + 8);
 			else:
 				step_timer.set_paused(true);
+		
+		elif (Input.is_action_pressed("ui_down") and globals.can_duck):
+			on_duck = true;
+			$CollisionShape2D.get_shape().set_extents(Vector2(4.5, 4));
+			$CollisionShape2D.position = Vector2(0.471, 0.12);
+			$AnimatedSprite.play("duckIdle");
+			
+			if !Input.is_action_pressed("ui_right") or !Input.is_action_pressed("ui_left"):
+				friction = true;
 		else:
+			on_duck = false;
+			$CollisionShape2D.get_shape().set_extents(Vector2(4.5, 6.54));
+			$CollisionShape2D.position = Vector2(0.471, 1.596);
 			$AnimatedSprite.play("Idle");
 			step_timer.set_paused(true);
 			friction = true;
 
 		# Jump Mechanics
-		if jump_count < MAX_JUMP_COUNT:
+		if jump_count < globals.MAX_JUMP_COUNT:
 			if(Input.is_action_just_pressed("ui_jump")):
 				motion.y = JUMP_HEIGHT;
 				jump_audio.set_pitch_scale(rand_range(0.75, 1));
@@ -90,7 +111,7 @@ func _get_input():
 		if is_on_floor():
 			if on_ground == false:
 				on_ground = true;
-				jump_count = MAX_JUMP_COUNT;
+				jump_count = globals.MAX_JUMP_COUNT;
 
 			if motion.y >= 0:
 				jump_count = 0;
@@ -106,7 +127,7 @@ func _get_input():
 			if motion.y < 0:
 				$AnimatedSprite.play("Jump");
 			else:
-				if can_wall_jump:
+				if globals.can_wall_jump:
 					for i in get_slide_count():
 						var collision = get_slide_collision(i).get_normal();
 						if collision == Vector2(1, 0) or Vector2(-1, 0):

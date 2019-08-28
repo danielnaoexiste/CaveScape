@@ -282,3 +282,7 @@ rotation = -1.5755
 [node name="Chest2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 375.317, 71.9342 )
 scale = Vector2( -1, 1 )
+
+[node name="Chest3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 358.253, 296.042 )
+scale = Vector2( -1, 1 )
