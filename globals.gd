@@ -9,4 +9,4 @@ extends Node
 var n_chest = 0;
 var MAX_JUMP_COUNT = 1;
 var can_wall_jump = false;
-var can_duck = false;
+var can_duck = true;
