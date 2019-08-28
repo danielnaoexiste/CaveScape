@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grad.png-b3a4cd8653f7b786781834f96f709f17.stex"
+path="res://.import/Exit_normal.png-327bf8c94bd241a6d607bd9bbf2f8b44.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://EFFECTS/grad.png"
-dest_files=[ "res://.import/grad.png-b3a4cd8653f7b786781834f96f709f17.stex" ]
+source_file="res://ART/Menu/Exit_normal.png"
+dest_files=[ "res://.import/Exit_normal.png-327bf8c94bd241a6d607bd9bbf2f8b44.stex" ]
 
 [params]
 

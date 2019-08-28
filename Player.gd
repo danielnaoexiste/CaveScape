@@ -20,15 +20,19 @@ var jump_count = 0;
 var on_duck = false;
 var on_ground = false;
 
-onready var step_audio : AudioStreamPlayer2D = $StepSound;
-onready var jump_audio : AudioStreamPlayer2D = $JumpSound;
+onready var step_audio : AudioStreamPlayer2D = $Sounds/StepSound;
+onready var jump_audio : AudioStreamPlayer2D = $Sounds/JumpSound;
 onready var step_timer : Timer = $StepTimer;
 onready var dust_scene = load("res://EFFECTS/Particles2D.tscn");
+
+onready var cam = $Camera2D
+onready var camhandler = $CamHandler
 
 # Footsteps
 func _on_StepTimer_timeout():
 	step_audio.set_pitch_scale(rand_range(0.5, 1));
 	step_audio.play();
+	print(Performance.get_monitor(Performance.TIME_FPS))
 
 func _ready():
 	step_timer.start(.35);
@@ -41,6 +45,8 @@ func _physics_process(delta):
 	_get_input();
 	
 	motion = move_and_slide(motion, UP);
+	
+	_camera_snap();
 	
 func _get_input():
 
@@ -89,6 +95,7 @@ func _get_input():
 			
 			if !Input.is_action_pressed("ui_right") or !Input.is_action_pressed("ui_left"):
 				friction = true;
+				step_timer.set_paused(true);
 		else:
 			on_duck = false;
 			$CollisionShape2D.get_shape().set_extents(Vector2(4.5, 6.54));
@@ -105,7 +112,6 @@ func _get_input():
 				jump_audio.play();
 				on_ground = false;
 				jump_count += 1;
-				print(jump_count);
 
 		 # Controls Double Jump
 		if is_on_floor():
@@ -156,3 +162,11 @@ func _spawn_dust(dir, x, y):
 	
 	if is_on_floor():
 		world.add_child(dust);
+		
+func _camera_snap():
+	for area in camhandler.get_overlapping_areas():
+		if area.is_in_group("camera_snap"):
+			cam.limit_left = area.position.x;
+			cam.limit_right = area.position.x + 280 * area.scale.x;
+			cam.limit_top = area.position.y;
+			cam.limit_bottom = area.position.y + 180 * area.scale.y;

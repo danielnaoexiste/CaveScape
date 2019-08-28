@@ -7,7 +7,8 @@ func _physics_process(delta):
 	for body in bodies:
 		if body.name == "Player":
 			ScreenText.get_node("PowerUpText")._change_text("You Just Got: ");
-			body.get_node("PowerUpSound").play();
+			body.get_node("Sounds").get_node("PowerUpSound").set_pitch_scale(rand_range(0.8, 1));
+			body.get_node("Sounds").get_node("PowerUpSound").play();
 			match globals.n_chest:
 				0:
 					globals.MAX_JUMP_COUNT += 1;

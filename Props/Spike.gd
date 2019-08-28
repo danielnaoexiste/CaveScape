@@ -10,4 +10,6 @@ func _physics_process(delta):
 			body.get_node("Camera2D").get_node("ScreenShake")._start(0.3, 15, 5, 1);
 			body.motion = Vector2(0, 0);
 			body.position = spawn_point.position;
+			body.get_node("Sounds").get_node("HitSound").set_pitch_scale(rand_range(0.7, 1))
+			body.get_node("Sounds").get_node("HitSound").play();
 			body.is_alive = true; 

@@ -1,15 +1,17 @@
 extends Area2D
 
 #onready var screen_text = get_node("/root/ScreenText");
-var powerup_scene = preload("res://Props/DjOrb.tscn");
+var powerup_scene = preload("res://Props/Orb.tscn");
 var is_open: bool = false;
 
 func _physics_process(delta):
 	var bodies = get_overlapping_bodies();
 	for body in bodies:
 		if body.name == "Player":
-			if(Input.is_action_just_pressed("ui_action") && !is_open):
+			if(Input.is_action_just_pressed("ui_action") && !is_open && globals.keys > 0):
 				is_open = true;
+				globals.keys -= 1;
+				print("Keys: " + globals.keys as String);
 				ScreenText.get_node("PowerUpText")._change_text("You just opened the Chest!");
 				$ChestClosed.visible = false;
 				$ChestOpen.visible = true;

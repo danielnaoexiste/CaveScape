@@ -1,63 +1,66 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://ART/CHAR/c_duckRun0.png" type="Texture" id=2]
-[ext_resource path="res://ART/CHAR/c_duckRun1.png" type="Texture" id=3]
-[ext_resource path="res://ART/CHAR/c_duckRun2.png" type="Texture" id=4]
-[ext_resource path="res://ART/CHAR/c_duckRun3.png" type="Texture" id=5]
-[ext_resource path="res://ART/CHAR/char_jump.png" type="Texture" id=6]
-[ext_resource path="res://ART/CHAR/c_idle0.png" type="Texture" id=7]
-[ext_resource path="res://ART/CHAR/c_idle1.png" type="Texture" id=8]
-[ext_resource path="res://ART/CHAR/c_idle2.png" type="Texture" id=9]
-[ext_resource path="res://ART/CHAR/c_idle3.png" type="Texture" id=10]
-[ext_resource path="res://ART/CHAR/c_run0.png" type="Texture" id=11]
-[ext_resource path="res://ART/CHAR/c_run1.png" type="Texture" id=12]
-[ext_resource path="res://ART/CHAR/c_run2.png" type="Texture" id=13]
-[ext_resource path="res://ART/CHAR/c_run3.png" type="Texture" id=14]
-[ext_resource path="res://ART/CHAR/char_fall.png" type="Texture" id=15]
-[ext_resource path="res://ART/CHAR/c_duck.png" type="Texture" id=16]
-[ext_resource path="res://ART/CHAR/c_duck1.png" type="Texture" id=17]
+[ext_resource path="res://ART/CHAR/c_duck.png" type="Texture" id=2]
+[ext_resource path="res://ART/CHAR/c_duck1.png" type="Texture" id=3]
+[ext_resource path="res://ART/CHAR/c_idle0.png" type="Texture" id=4]
+[ext_resource path="res://ART/CHAR/c_idle1.png" type="Texture" id=5]
+[ext_resource path="res://ART/CHAR/c_idle2.png" type="Texture" id=6]
+[ext_resource path="res://ART/CHAR/c_idle3.png" type="Texture" id=7]
+[ext_resource path="res://ART/CHAR/c_run0.png" type="Texture" id=8]
+[ext_resource path="res://ART/CHAR/c_run1.png" type="Texture" id=9]
+[ext_resource path="res://ART/CHAR/c_run2.png" type="Texture" id=10]
+[ext_resource path="res://ART/CHAR/c_run3.png" type="Texture" id=11]
+[ext_resource path="res://ART/CHAR/char_fall.png" type="Texture" id=12]
+[ext_resource path="res://ART/CHAR/c_duckRun0.png" type="Texture" id=13]
+[ext_resource path="res://ART/CHAR/c_duckRun1.png" type="Texture" id=14]
+[ext_resource path="res://ART/CHAR/c_duckRun2.png" type="Texture" id=15]
+[ext_resource path="res://ART/CHAR/c_duckRun3.png" type="Texture" id=16]
+[ext_resource path="res://ART/CHAR/char_jump.png" type="Texture" id=17]
 [ext_resource path="res://EFFECTS/ScreenShake.tscn" type="PackedScene" id=18]
-[ext_resource path="res://EFFECTS/grad.png" type="Texture" id=19]
-[ext_resource path="res://SFX/Walk.wav" type="AudioStream" id=20]
-[ext_resource path="res://SFX/Jump.wav" type="AudioStream" id=21]
-[ext_resource path="res://SFX/PowerUp.wav" type="AudioStream" id=22]
+[ext_resource path="res://SFX/Walk.wav" type="AudioStream" id=19]
+[ext_resource path="res://SFX/Jump.wav" type="AudioStream" id=20]
+[ext_resource path="res://SFX/PowerUp.wav" type="AudioStream" id=21]
+[ext_resource path="res://SFX/Hit.wav" type="AudioStream" id=22]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "duckRun",
+"name": "duckIdle",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 4.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "Run",
 "speed": 6.0
 }, {
-"frames": [ ExtResource( 15 ) ],
+"frames": [ ExtResource( 12 ) ],
 "loop": true,
 "name": "Fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ), ExtResource( 17 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
-"name": "duckIdle",
+"name": "duckRun",
 "speed": 3.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4.5, 6.54 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4.5, 8 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -65,44 +68,53 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 0.118498 )
 frames = SubResource( 1 )
-animation = "duckIdle"
-frame = 1
-playing = true
+animation = "Idle"
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.470672, 1.59617 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+editor/display_folded = true
 current = true
 zoom = Vector2( 0.25, 0.25 )
-limit_left = 0
-limit_top = 0
+process_mode = 0
 smoothing_enabled = true
+smoothing_speed = 10.0
 drag_margin_left = 0.1
 drag_margin_right = 0.1
 
 [node name="ScreenShake" parent="Camera2D" instance=ExtResource( 18 )]
 
-[node name="Light2D" type="Light2D" parent="."]
-scale = Vector2( 0.1, 0.1 )
-enabled = false
-texture = ExtResource( 19 )
-energy = 0.5
+[node name="CamHandler" type="Area2D" parent="."]
+position = Vector2( -4.5, -3.5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CamHandler"]
+shape = SubResource( 3 )
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.35
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 20 )
+[node name="Sounds" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="StepSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 19 )
 volume_db = -1.0
 
-[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 21 )
+[node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 20 )
 volume_db = -8.0
 
-[node name="PowerUpSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 22 )
+[node name="PowerUpSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 21 )
 volume_db = -2.0
-attenuation = 0.329877
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 22 )
+volume_db = -4.0
+
+[node name="CameraTween" type="Tween" parent="."]
+playback_process_mode = 0
 [connection signal="timeout" from="StepTimer" to="." method="_on_StepTimer_timeout"]
