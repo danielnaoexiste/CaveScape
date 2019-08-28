@@ -7,7 +7,7 @@ extends Node
 
 # Power Up Variables
 var n_chest = 0;
-var MAX_JUMP_COUNT = 2;
-var can_wall_jump = true;
-var can_duck = true;
+var MAX_JUMP_COUNT = 1;
+var can_wall_jump = false;
+var can_duck = false;
 var keys = 3;
