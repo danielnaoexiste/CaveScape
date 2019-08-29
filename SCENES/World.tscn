@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://SCENES/World.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ART/Props/Signs Atlas.png" type="Texture" id=8]
 [ext_resource path="res://Props/Spike.tscn" type="PackedScene" id=9]
 [ext_resource path="res://EFFECTS/camera_snap.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Props/Block.tscn" type="PackedScene" id=11]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -312,6 +313,7 @@ tile_data = PoolIntArray( 327707, 536870912, 65536, 327708, 536870912, 65537, 32
 position = Vector2( 46.6534, 41.812 )
 
 [node name="Spikes" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Spike" parent="Spikes" instance=ExtResource( 9 )]
 position = Vector2( 99.0505, 125.001 )
@@ -351,4 +353,8 @@ scale = Vector2( 1.3, 1 )
 editor/display_folded = true
 
 [node name="TextTimer" type="Timer" parent="Text Timers"]
+
+[node name="Block" parent="." instance=ExtResource( 11 )]
+position = Vector2( 248.438, 39.8854 )
+mass = 100.0
 [connection signal="timeout" from="Text Timers/TextTimer" to="." method="_on_Text1_timeout"]
