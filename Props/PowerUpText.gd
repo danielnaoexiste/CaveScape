@@ -5,7 +5,10 @@ const items: Array = [
 	'Wall Jump', 
 	'Cake',
 	'Ultra Weapon',
-	'Duck'
+	'Duck',
+	'Weighted Companion Cube',
+	'The Truth',
+	'Lies'
 ];
 
 func _ready():
@@ -14,15 +17,13 @@ func _ready():
 
 func _change_text(new_text):
 	if new_text != "You just opened the Chest!":
-		text = new_text + get_random_item();
-		set_anchors_preset(Control.PRESET_CENTER_BOTTOM, false);
+		text = new_text + _get_random_item();
 		$Timer.start(2);
 	else:
 		text = new_text;
-		set_anchors_preset(Control.PRESET_CENTER_BOTTOM, false);
 
 func _on_Timer_timeout():
 	text = "";
 
-static func get_random_item() -> String:
+static func _get_random_item() -> String:
 	return items[randi() % len(items)] as String;

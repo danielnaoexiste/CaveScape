@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://ART/CHAR/c_duck.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://SFX/Jump.wav" type="AudioStream" id=20]
 [ext_resource path="res://SFX/PowerUp.wav" type="AudioStream" id=21]
 [ext_resource path="res://SFX/Hit.wav" type="AudioStream" id=22]
+[ext_resource path="res://SFX/Shoot.wav" type="AudioStream" id=23]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -70,6 +71,7 @@ position = Vector2( 0, 0.118498 )
 frames = SubResource( 1 )
 animation = "Idle"
 frame = 2
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.470672, 1.59617 )
@@ -88,6 +90,7 @@ drag_margin_right = 0.1
 [node name="ScreenShake" parent="Camera2D" instance=ExtResource( 18 )]
 
 [node name="CamHandler" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( -3, -3.5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CamHandler"]
@@ -97,7 +100,6 @@ shape = SubResource( 3 )
 wait_time = 0.35
 
 [node name="Sounds" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="StepSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
@@ -115,6 +117,16 @@ volume_db = -2.0
 stream = ExtResource( 22 )
 volume_db = -4.0
 
+[node name="ShootSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 23 )
+volume_db = -1.0
+
 [node name="CameraTween" type="Tween" parent="."]
 playback_process_mode = 0
+
+[node name="Bullet Pos" type="Position2D" parent="."]
+position = Vector2( 5, 3 )
+
+[node name="Bullet Timer" type="Timer" parent="."]
 [connection signal="timeout" from="StepTimer" to="." method="_on_StepTimer_timeout"]
+[connection signal="timeout" from="Bullet Timer" to="." method="_on_Bullet_Timer_timeout"]
