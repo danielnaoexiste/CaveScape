@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Props/Bullet.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20.0658, 20.0064 )
+
+[node name="Bullet" type="Area2D"]
+scale = Vector2( 0.101702, 0.027722 )
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 20.1112, 19.7128 )
+shape = SubResource( 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 20.336, 20.48 )
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]

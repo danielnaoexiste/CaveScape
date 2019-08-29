@@ -11,6 +11,9 @@ const PUSH_SPEED = 45;
 const DUCK_ACC = 10;
 const DUCK_MAXSPD = 60;
 
+const bullet_scene = preload("res://Props/Bullet.tscn");
+const dust_scene = preload("res://EFFECTS/Particles2D.tscn");
+
 var motion = Vector2();
 var is_alive = true;
 
@@ -19,11 +22,13 @@ var jump_count = 0;
 
 var on_duck = false;
 var on_ground = false;
+var on_shoot = false;
 
 onready var step_audio : AudioStreamPlayer2D = $Sounds/StepSound;
 onready var jump_audio : AudioStreamPlayer2D = $Sounds/JumpSound;
+onready var shoot_audio : AudioStreamPlayer2D = $Sounds/ShootSound;
 onready var step_timer : Timer = $StepTimer;
-onready var dust_scene = load("res://EFFECTS/Particles2D.tscn");
+
 
 onready var cam = $Camera2D
 onready var camhandler = $CamHandler
@@ -58,12 +63,11 @@ func _get_input():
 				motion.x = min(motion.x + ACCELERATION, MAX_SPEED);
 				
 				$AnimatedSprite.flip_h = false;
-				$AnimatedSprite.play("Run");			
+				$AnimatedSprite.play("Run");
 			else:
 				motion.x = min(motion.x + DUCK_ACC, DUCK_MAXSPD);
-				
 				$AnimatedSprite.flip_h = false;
-				$AnimatedSprite.play("duckRun");		
+				$AnimatedSprite.play("duckRun");
 			if is_on_floor():
 				step_timer.set_paused(false);
 				_spawn_dust(0, position.x, position.y + 8);
@@ -103,7 +107,24 @@ func _get_input():
 			$AnimatedSprite.play("Idle");
 			step_timer.set_paused(true);
 			friction = true;
-
+		
+		if (Input.is_action_just_pressed("ui_shoot") && globals.can_shoot && !on_shoot):
+			var bullet = bullet_scene.instance();
+			on_shoot = true;
+			$"Bullet Timer".start(0.5);
+			if !$AnimatedSprite.flip_h:
+				$"Bullet Pos".position.x = 5;
+				bullet._set_bullet_direction(1);
+			else:
+				$"Bullet Pos".position.x = -8.5;
+				bullet._set_bullet_direction(-1);
+			
+			shoot_audio.set_pitch_scale(rand_range(0.75, 1));
+			shoot_audio.play();
+			$Camera2D/ScreenShake._start(0.2, 25, 2, 1);
+			get_parent().add_child(bullet);
+			bullet.position = $"Bullet Pos".global_position;
+		
 		# Jump Mechanics
 		if jump_count < globals.MAX_JUMP_COUNT:
 			if(Input.is_action_just_pressed("ui_jump")):
@@ -170,3 +191,6 @@ func _camera_snap():
 			cam.limit_right = area.position.x + 280 * area.scale.x;
 			cam.limit_top = area.position.y;
 			cam.limit_bottom = area.position.y + 180 * area.scale.y;
+
+func _on_Bullet_Timer_timeout():
+	on_shoot = false;

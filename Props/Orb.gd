@@ -22,4 +22,8 @@ func _physics_process(delta):
 					globals.can_duck = true;
 					print("Duck")
 					globals.n_chest += 1;
+				3:
+					globals.can_shoot = true;
+					print("Gun");
+					globals.n_chest += 1;
 			self.queue_free();
