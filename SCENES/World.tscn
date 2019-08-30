@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://SCENES/World.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Props/Spike.tscn" type="PackedScene" id=9]
 [ext_resource path="res://EFFECTS/camera_snap.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Props/Block.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Props/Key.tscn" type="PackedScene" id=12]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -357,4 +358,7 @@ editor/display_folded = true
 [node name="Block" parent="." instance=ExtResource( 11 )]
 position = Vector2( 248.438, 39.8854 )
 mass = 100.0
+
+[node name="Key" parent="." instance=ExtResource( 12 )]
+position = Vector2( 142.679, 115.546 )
 [connection signal="timeout" from="Text Timers/TextTimer" to="." method="_on_Text1_timeout"]
