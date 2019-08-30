@@ -12,18 +12,18 @@ func _physics_process(delta):
 			match globals.n_chest:
 				0:
 					globals.MAX_JUMP_COUNT += 1;
-					print("DJ");
+					print("Double Jump");
 					globals.n_chest += 1;
 				1:
 					globals.can_wall_jump = true;
-					print("WJ");
+					print("Wall Jump")
 					globals.n_chest += 1;
 				2:
-					globals.can_duck = true;
-					print("Duck")
-					globals.n_chest += 1;
-				3:
 					globals.can_shoot = true;
 					print("Gun");
+					globals.n_chest += 1;
+				3:
+					globals.can_duck = true;
+					print("Duck");
 					globals.n_chest += 1;
 			self.queue_free();

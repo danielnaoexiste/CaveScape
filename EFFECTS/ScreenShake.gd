@@ -35,7 +35,6 @@ func _reset():
 func _on_Frequency_timeout():
 	_new_shake();
 
-
 func _on_Duration_timeout():
 	_reset();
 	$Frequency.stop();

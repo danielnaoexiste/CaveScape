@@ -15,12 +15,12 @@ _global_script_class_icons={
 
 [application]
 
-config/name="CGJ"
+config/name="CaveScape"
 run/main_scene="res://SCENES/World.tscn"
 boot_splash/image="res://ART/i_G8x_.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.156863, 0.176471, 0.203922, 1 )
-config/icon="res://icon.png"
+config/icon="res://ART/Icon/Icon.png"
 
 [autoload]
 
@@ -33,6 +33,7 @@ Chest="*res://Props/Chest.gd"
 
 window/size/height=544
 window/size/resizable=false
+window/vsync/use_vsync=false
 
 [importer_defaults]
 
@@ -132,6 +133,7 @@ ui_shoot={
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0, 0, 0, 1 )

@@ -10,3 +10,5 @@ extents = Vector2( 140, 90 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 140, 90 )
 shape = SubResource( 1 )
+
+[node name="SpawnPosition" type="Position2D" parent="."]
