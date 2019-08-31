@@ -16,7 +16,7 @@ func _ready():
 	text = "";
 
 func _change_text(new_text):
-	if new_text != "You just opened the Chest!":
+	if new_text != "You just opened the Chest!" and new_text != "You Just Got: The Real Cake":
 		text = new_text + _get_random_item();
 		$Timer.start(2);
 	else:

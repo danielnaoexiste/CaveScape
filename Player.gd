@@ -58,115 +58,118 @@ func _get_input():
 
 	#Character Movement
 	var friction = false;
-	if(Input.is_action_pressed("ui_right")):
-		if(!on_duck):
-			motion.x = min(motion.x + ACCELERATION, MAX_SPEED);
-			
-			$AnimatedSprite.flip_h = false;
-			$AnimatedSprite.play("Run");
-		else:
-			motion.x = min(motion.x + DUCK_ACC, DUCK_MAXSPD);
-			$AnimatedSprite.flip_h = false;
-			$AnimatedSprite.play("duckRun");
-		
-		if is_on_floor():
-			step_timer.set_paused(false);
-			_spawn_dust(0, position.x, position.y + 8);
-		else:
-			step_timer.set_paused(true);
-		
-	elif(Input.is_action_pressed("ui_left")):
-		if (!on_duck):
-			motion.x = max(motion.x - ACCELERATION, -MAX_SPEED);
-			
-			$AnimatedSprite.flip_h = true;
-			$AnimatedSprite.play("Run");
-		else: 
-			motion.x = max(motion.x - DUCK_ACC, -DUCK_MAXSPD);
-			
-			$AnimatedSprite.flip_h = true;
-			$AnimatedSprite.play("duckRun");
-		
-		if is_on_floor():
-			step_timer.set_paused(false);
-			_spawn_dust(1, position.x, position.y + 8);
-		
-	elif (Input.is_action_pressed("ui_down") and globals.can_duck):
-		on_duck = true;
-		$CollisionShape2D.get_shape().set_extents(Vector2(4.5, 4));
-		$CollisionShape2D.position = Vector2(0.471, 0.12);
-		$AnimatedSprite.play("duckIdle");
-			
-		if !Input.is_action_pressed("ui_right") or !Input.is_action_pressed("ui_left"):
-			friction = true;
-			step_timer.set_paused(true);
-	else:
-		on_duck = false;
-		$CollisionShape2D.get_shape().set_extents(Vector2(4.5, 6.54));
-		$CollisionShape2D.position = Vector2(0.471, 1.596);
+	if (!globals.can_move):
 		$AnimatedSprite.play("Idle");
-		step_timer.set_paused(true);
-		friction = true;
-	
-	if (Input.is_action_just_pressed("ui_shoot") && globals.can_shoot && !on_shoot):
-		var bullet = bullet_scene.instance();
-		on_shoot = true;
-		$"Bullet Timer".start(0.5);
-		if !$AnimatedSprite.flip_h:
-			$"Bullet Pos".position.x = 5;
-			bullet._set_bullet_direction(1);
-		else:
-			$"Bullet Pos".position.x = -8.5;
-			bullet._set_bullet_direction(-1);
-		
-		shoot_audio.set_pitch_scale(rand_range(0.75, 1));
-		shoot_audio.play();
-		$Camera2D/ScreenShake._start(0.2, 25, 2, 1);
-		get_parent().add_child(bullet);
-		bullet.position = $"Bullet Pos".global_position;
-	
-		# Jump Mechanics
-	if jump_count < globals.MAX_JUMP_COUNT:
-		if(Input.is_action_just_pressed("ui_jump")):
-			motion.y = JUMP_HEIGHT;
-			jump_audio.set_pitch_scale(rand_range(0.75, 1));
-			jump_audio.play();
-			on_ground = false;
-			jump_count += 1;
-		 # Controls Double Jump
-	if is_on_floor():
-		if on_ground == false:
-			on_ground = true;
-			jump_count = globals.MAX_JUMP_COUNT;
-
-		if motion.y >= 0:
-			jump_count = 0;
-		if friction == true:
-			motion.x = lerp(motion.x, 0, 0.2);
-
 	else:
-		if on_ground == true:
-			on_ground == false;
-			jump_count = 1;
-		if friction == true:
-			motion.x = lerp(motion.x, 0, 0.05);
-		if motion.y < 0:
-			$AnimatedSprite.play("Jump");
+		if(Input.is_action_pressed("ui_right")):
+			if(!on_duck):
+				motion.x = min(motion.x + ACCELERATION, MAX_SPEED);
+				
+				$AnimatedSprite.flip_h = false;
+				$AnimatedSprite.play("Run");
+			else:
+				motion.x = min(motion.x + DUCK_ACC, DUCK_MAXSPD);
+				$AnimatedSprite.flip_h = false;
+				$AnimatedSprite.play("duckRun");
+			
+			if is_on_floor():
+				step_timer.set_paused(false);
+				_spawn_dust(0, position.x, position.y + 8);
+			else:
+				step_timer.set_paused(true);
+			
+		elif(Input.is_action_pressed("ui_left")):
+			if (!on_duck):
+				motion.x = max(motion.x - ACCELERATION, -MAX_SPEED);
+				
+				$AnimatedSprite.flip_h = true;
+				$AnimatedSprite.play("Run");
+			else: 
+				motion.x = max(motion.x - DUCK_ACC, -DUCK_MAXSPD);
+				
+				$AnimatedSprite.flip_h = true;
+				$AnimatedSprite.play("duckRun");
+			
+			if is_on_floor():
+				step_timer.set_paused(false);
+				_spawn_dust(1, position.x, position.y + 8);
+			
+		elif (Input.is_action_pressed("ui_down") and globals.can_duck):
+			on_duck = true;
+			$CollisionShape2D.get_shape().set_extents(Vector2(4.5, 4));
+			$CollisionShape2D.position = Vector2(0.471, 0.12);
+			$AnimatedSprite.play("duckIdle");
+				
+			if !Input.is_action_pressed("ui_right") or !Input.is_action_pressed("ui_left"):
+				friction = true;
+				step_timer.set_paused(true);
 		else:
-			if globals.can_wall_jump:
-				for i in get_slide_count():
-					var collision = get_slide_collision(i).get_normal();
-					if collision == Vector2(1, 0) or Vector2(-1, 0):
-						motion.y -= GRAVITY/2 as int;
-						if(Input.is_action_just_pressed("ui_jump")):
-							motion.y = JUMP_HEIGHT/1.2;
-							if ($AnimatedSprite.flip_h):
-								motion.x = 125;
-							else:
-								motion.x = -125;
-							jump_audio.set_pitch_scale(rand_range(0.75, 1));
-							jump_audio.play();
-			$AnimatedSprite.play("Fall");
+			on_duck = false;
+			$CollisionShape2D.get_shape().set_extents(Vector2(4.5, 6.54));
+			$CollisionShape2D.position = Vector2(0.471, 1.596);
+			$AnimatedSprite.play("Idle");
+			step_timer.set_paused(true);
+			friction = true;
+		
+		if (Input.is_action_just_pressed("ui_shoot") && globals.can_shoot && !on_shoot):
+			var bullet = bullet_scene.instance();
+			on_shoot = true;
+			$"Bullet Timer".start(0.5);
+			if !$AnimatedSprite.flip_h:
+				$"Bullet Pos".position.x = 5;
+				bullet._set_bullet_direction(1);
+			else:
+				$"Bullet Pos".position.x = -8.5;
+				bullet._set_bullet_direction(-1);
+			
+			shoot_audio.set_pitch_scale(rand_range(0.75, 1));
+			shoot_audio.play();
+			$Camera2D/ScreenShake._start(0.2, 25, 2, 1);
+			get_parent().add_child(bullet);
+			bullet.position = $"Bullet Pos".global_position;
+		
+			# Jump Mechanics
+		if jump_count < globals.MAX_JUMP_COUNT:
+			if(Input.is_action_just_pressed("ui_jump")):
+				motion.y = JUMP_HEIGHT;
+				jump_audio.set_pitch_scale(rand_range(0.75, 1));
+				jump_audio.play();
+				on_ground = false;
+				jump_count += 1;
+			 # Controls Double Jump
+		if is_on_floor():
+			if on_ground == false:
+				on_ground = true;
+				jump_count = globals.MAX_JUMP_COUNT;
+	
+			if motion.y >= 0:
+				jump_count = 0;
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.2);
+	
+		else:
+			if on_ground == true:
+				on_ground == false;
+				jump_count = 1;
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.05);
+			if motion.y < 0:
+				$AnimatedSprite.play("Jump");
+			else:
+				if globals.can_wall_jump:
+					for i in get_slide_count():
+						var collision = get_slide_collision(i).get_normal();
+						if collision == Vector2(1, 0) or Vector2(-1, 0):
+							motion.y -= GRAVITY/2 as int;
+							if(Input.is_action_just_pressed("ui_jump")):
+								motion.y = JUMP_HEIGHT/1.2;
+								if ($AnimatedSprite.flip_h):
+									motion.x = 125;
+								else:
+									motion.x = -125;
+								jump_audio.set_pitch_scale(rand_range(0.75, 1));
+								jump_audio.play();
+				$AnimatedSprite.play("Fall");
 
 func _spawn_dust(dir, x, y):
 	# Spawns Dust

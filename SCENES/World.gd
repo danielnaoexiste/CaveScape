@@ -16,6 +16,7 @@ func _on_Text1_timeout():
 		2:
 			scrtext.text = "Good Luck!";
 			cont += 1;
+			globals.can_move = true;
 		3:
 			scrtext.text = "";
 			cont = 0;
