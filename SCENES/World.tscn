@@ -405,7 +405,6 @@ editor/display_folded = true
 [node name="TextTimer" type="Timer" parent="Text Timers"]
 
 [node name="Spikes" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="cs1" type="Node" parent="Spikes"]
 editor/display_folded = true
@@ -733,9 +732,18 @@ position = Vector2( -104.994, 157.105 )
 position = Vector2( -99.51, 157.105 )
 
 [node name="cs13" type="Node" parent="Spikes"]
+editor/display_folded = true
 
 [node name="Spike79" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -186.168, 733.396 )
+
+[node name="Spike80" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( -130.838, 679.738 )
+rotation = 4.71239
+
+[node name="Spike81" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( -92.8912, 680.265 )
+rotation = 1.5708
 
 [node name="Spike35" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -125.7, 733.448 )
@@ -743,8 +751,20 @@ position = Vector2( -125.7, 733.448 )
 [node name="Spike65" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( 149.293, 733.704 )
 
+[node name="Spike69" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( 152.144, 595.201 )
+rotation = 3.14159
+
 [node name="Spike7" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -180.668, 733.396 )
+
+[node name="Spike73" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( -130.956, 685.355 )
+rotation = 4.71239
+
+[node name="Spike78" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( -93.0089, 685.882 )
+rotation = 1.5708
 
 [node name="Spike33" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -120.2, 733.448 )
@@ -752,8 +772,20 @@ position = Vector2( -120.2, 733.448 )
 [node name="Spike66" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( 154.793, 733.704 )
 
+[node name="Spike71" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( 157.644, 595.201 )
+rotation = 3.14159
+
 [node name="Spike8" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -175.168, 733.396 )
+
+[node name="Spike74" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( -130.88, 690.973 )
+rotation = 4.71239
+
+[node name="Spike77" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( -92.9328, 691.5 )
+rotation = 1.5708
 
 [node name="Spike25" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( 99.8248, 733.653 )
@@ -764,8 +796,20 @@ position = Vector2( -114.7, 733.448 )
 [node name="Spike67" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( 160.293, 733.704 )
 
+[node name="Spike68" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( 163.144, 595.201 )
+rotation = 3.14159
+
 [node name="Spike9" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -169.668, 733.396 )
+
+[node name="Spike75" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( -130.998, 696.59 )
+rotation = 4.71239
+
+[node name="Spike76" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( -93.0504, 697.117 )
+rotation = 1.5708
 
 [node name="Spike26" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( 105.325, 733.653 )
@@ -775,6 +819,10 @@ position = Vector2( -109.2, 733.448 )
 
 [node name="Spike59" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( 165.793, 733.704 )
+
+[node name="Spike72" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( 168.644, 595.201 )
+rotation = 3.14159
 
 [node name="Spike10" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -164.168, 733.396 )
@@ -787,6 +835,10 @@ position = Vector2( -103.7, 733.448 )
 
 [node name="Spike52" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( 171.293, 733.704 )
+
+[node name="Spike70" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( 174.144, 595.201 )
+rotation = 3.14159
 
 [node name="Spike11" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -158.668, 733.396 )
@@ -869,6 +921,14 @@ position = Vector2( -136.668, 733.396 )
 [node name="Spike18" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( 138.325, 733.653 )
 
+[node name="Spike24" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( 141.176, 595.15 )
+rotation = 3.14159
+
+[node name="Spike28" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( 135.351, 595.15 )
+rotation = 3.14159
+
 [node name="Spike30" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -76.2002, 733.448 )
 
@@ -889,6 +949,10 @@ position = Vector2( -131.168, 733.396 )
 
 [node name="Spike17" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( 143.825, 733.653 )
+
+[node name="Spike27" parent="Spikes/cs13" instance=ExtResource( 8 )]
+position = Vector2( 146.676, 595.15 )
+rotation = 3.14159
 
 [node name="Spike31" parent="Spikes/cs13" instance=ExtResource( 8 )]
 position = Vector2( -70.7002, 733.448 )
