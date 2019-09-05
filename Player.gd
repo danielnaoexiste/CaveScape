@@ -37,12 +37,10 @@ onready var spawn_point = get_tree().get_root().get_node("World").get_node("Spaw
 func _on_StepTimer_timeout():
 	step_audio.set_pitch_scale(rand_range(0.5, 1));
 	step_audio.play();
-#	print(Performance.get_monitor(Performance.TIME_FPS))
 
 func _ready():
 	step_timer.start(.35);
 	step_timer.set_paused(true);
-	position = spawn_point.position;
 
 func _physics_process(delta):
 	# Gravity
@@ -136,6 +134,7 @@ func _get_input():
 				jump_audio.play();
 				on_ground = false;
 				jump_count += 1;
+				step_timer.set_paused(true);
 			 # Controls Double Jump
 		if is_on_floor():
 			if on_ground == false:
@@ -151,6 +150,7 @@ func _get_input():
 			if on_ground == true:
 				on_ground == false;
 				jump_count = 1;
+			#	step_timer.set_paused(true);
 			if friction == true:
 				motion.x = lerp(motion.x, 0, 0.05);
 			if motion.y < 0:

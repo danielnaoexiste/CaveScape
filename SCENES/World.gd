@@ -2,10 +2,10 @@ extends Node2D
 
 var cont = 1;
 onready var scrtext = ScreenText.get_node("PowerUpText");
-onready var textTimer = $"Text Timers/TextTimer"
+onready var textTimer = $"Text Timers/TextTimer";
 
 func _ready():
-	scrtext.text = "The only way to get to safety and hapiness";
+	scrtext.text = "The only way to get to safety and happiness";
 	textTimer.start(2.5);
 
 func _on_Text1_timeout():

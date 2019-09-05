@@ -6,6 +6,7 @@ extends Node
 # value easily through scenes
 
 var can_move = false;
+var finished = false;
 
 # Power Up Variables
 var n_chest = 0;
