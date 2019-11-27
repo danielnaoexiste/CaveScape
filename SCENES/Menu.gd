@@ -4,6 +4,7 @@ onready var screen_text = get_node("/root/ScreenText");
 
 
 func _ready():
+	globals._reset_globals()
 	$MarginContainer/VBoxContainer/TextureButton.grab_focus();
 	ScreenText.get_node("PowerUpText").text = "A Game by Daniel \"Vulpon\" Gazzaneo";
 
