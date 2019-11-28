@@ -1,8 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Props/Chest.gd" type="Script" id=1]
 [ext_resource path="res://ART/Props/Chest-Open.png" type="Texture" id=2]
 [ext_resource path="res://ART/Props/Chest-Closed.png" type="Texture" id=3]
+[ext_resource path="res://ART/Props/Arrow_1.png" type="Texture" id=4]
+[ext_resource path="res://ART/Props/Arrow_2.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 7 )
@@ -17,6 +27,12 @@ texture = ExtResource( 2 )
 
 [node name="ChestClosed" type="Sprite" parent="."]
 texture = ExtResource( 3 )
+
+[node name="Arrow" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( -1.43, -13 )
+frames = SubResource( 2 )
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 1 )

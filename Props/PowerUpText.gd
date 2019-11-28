@@ -24,6 +24,7 @@ func _change_text(new_text):
 
 func _on_Timer_timeout():
 	text = "";
+	$Timer.stop()
 
 static func _get_random_item() -> String:
 	return items[randi() % len(items)] as String;

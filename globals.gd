@@ -5,7 +5,7 @@ extends Node
 # This way they can mantain their 
 # value easily through scenes
 
-var can_move = true;
+var can_move = false;
 var finished = false;
 
 # Power Up Variables
@@ -18,6 +18,8 @@ var has_cake = false;
 var keys = 0;
 
 func _reset_globals():
+	can_move = false;
+	finished = false;
 	n_chest = 0;
 	MAX_JUMP_COUNT = 1;
 	can_wall_jump = false;
