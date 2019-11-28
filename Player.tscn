@@ -99,23 +99,23 @@ wait_time = 0.35
 
 [node name="StepSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
-volume_db = -3.0
+volume_db = -4.0
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 20 )
-volume_db = -13.0
+volume_db = -15.0
 
 [node name="PowerUpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 21 )
-volume_db = -13.0
+volume_db = -15.0
 
 [node name="HitSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 22 )
-volume_db = -8.0
+volume_db = -10.0
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 23 )
-volume_db = -2.0
+volume_db = -5.0
 
 [node name="CameraTween" type="Tween" parent="."]
 

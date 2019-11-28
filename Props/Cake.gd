@@ -9,6 +9,7 @@ func _physics_process(delta):
 			body.get_node("Sounds").get_node("PowerUpSound").set_pitch_scale(rand_range(0.8, 1));
 			body.get_node("Sounds").get_node("PowerUpSound").play();
 			ScreenText.get_node("PowerUpText")._change_text("You Just Got: The Real Cake");
+			ScreenText.get_node("PowerUpText/Timer").start(2.5)
 			if (globals.n_chest == 4):
 				globals.has_cake = true;
 				globals.n_chest += 1;
