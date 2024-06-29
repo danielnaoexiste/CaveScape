@@ -6,7 +6,7 @@
 [ext_resource path="res://ART/Props/Arrow_1.png" type="Texture" id=4]
 [ext_resource path="res://ART/Props/Arrow_2.png" type="Texture" id=5]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
@@ -14,7 +14,7 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 7 )
 
 [node name="Chest" type="Area2D"]
@@ -31,12 +31,12 @@ texture = ExtResource( 3 )
 [node name="Arrow" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1.43, -13 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 1 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="TextTimer" type="Timer" parent="."]
 [connection signal="timeout" from="TextTimer" to="." method="_on_TextTimer_timeout"]

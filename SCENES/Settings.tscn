@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://SCENES/volume_slider.tscn" type="PackedScene" id=2]
+
+[node name="Settings" type="VBoxContainer"]
+visible = false
+margin_left = 392.0
+margin_top = 138.0
+margin_right = 632.0
+margin_bottom = 405.0
+alignment = 1
+
+[node name="Label" type="Label" parent="."]
+margin_top = 38.0
+margin_right = 240.0
+margin_bottom = 71.0
+custom_fonts/font = ExtResource( 1 )
+text = "Settings"
+align = 1
+
+[node name="Control" type="Control" parent="."]
+margin_top = 75.0
+margin_right = 240.0
+margin_bottom = 91.0
+rect_min_size = Vector2( 240, 16 )
+
+[node name="Master" type="Label" parent="."]
+margin_top = 95.0
+margin_right = 240.0
+margin_bottom = 109.0
+text = "Master"
+
+[node name="MasterSlider" parent="." instance=ExtResource( 2 )]
+margin_top = 113.0
+margin_right = 240.0
+margin_bottom = 129.0
+
+[node name="Music" type="Label" parent="."]
+margin_top = 133.0
+margin_right = 240.0
+margin_bottom = 147.0
+text = "Music"
+
+[node name="MusicSlider" parent="." instance=ExtResource( 2 )]
+margin_top = 151.0
+margin_right = 240.0
+margin_bottom = 167.0
+bus_name = "Music"
+
+[node name="SFX" type="Label" parent="."]
+margin_top = 171.0
+margin_right = 240.0
+margin_bottom = 185.0
+text = "SFX"
+
+[node name="SFXSlider" parent="." instance=ExtResource( 2 )]
+margin_top = 189.0
+margin_right = 240.0
+margin_bottom = 205.0
+bus_name = "SFX"
+
+[node name="Return" type="Button" parent="."]
+margin_top = 209.0
+margin_right = 240.0
+margin_bottom = 229.0
+text = "Return"
+flat = true

@@ -1,10 +1,11 @@
 extends Area2D
 
-#onready var screen_text = get_node("/root/ScreenText");
+
 const powerup_scene = preload("res://Props/Orb.tscn");
 const cake_scene = preload("res://Props/Cake.tscn");
 onready var scr_text = get_node("/root/ScreenText");
 var is_open: bool = false;
+
 
 func _physics_process(delta):
 	var bodies = get_overlapping_bodies();
@@ -47,7 +48,8 @@ func _physics_process(delta):
 						else:
 							ScreenText.get_node("PowerUpText").text = "You need something to open this Chest";
 							$TextTimer.start(2.5);
-							
+
+
 func _on_TextTimer_timeout():
 	ScreenText.get_node("PowerUpText").text = "";
 	$TextTimer.stop()

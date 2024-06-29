@@ -1,6 +1,7 @@
 extends Node2D
 
 var cont = 1;
+
 onready var scrtext = ScreenText.get_node("PowerUpText");
 onready var textTimer = $"Text Timers/TextTimer";
 

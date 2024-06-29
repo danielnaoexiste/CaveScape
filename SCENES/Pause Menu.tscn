@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://MenuTheme.tres" type="Theme" id=1]
+[ext_resource path="res://SCENES/Pause Menu.gd" type="Script" id=2]
+[ext_resource path="res://Font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://SCENES/Settings.tscn" type="PackedScene" id=4]
+
+[node name="Pause Menu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0705882, 0.0705882, 0.0705882, 0.792157 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Game Paused" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 416.0
+margin_top = 181.0
+margin_right = 608.0
+margin_bottom = 363.0
+
+[node name="Label" type="Label" parent="CenterContainer/Game Paused"]
+margin_right = 192.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 3 )
+text = "Game Paused"
+
+[node name="Control" type="Control" parent="CenterContainer/Game Paused"]
+margin_top = 37.0
+margin_right = 192.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 0, 16 )
+
+[node name="Resume" type="Button" parent="CenterContainer/Game Paused"]
+margin_top = 57.0
+margin_right = 192.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 3 )
+text = "Resume"
+flat = true
+
+[node name="Settings" type="Button" parent="CenterContainer/Game Paused"]
+margin_top = 100.0
+margin_right = 192.0
+margin_bottom = 139.0
+custom_fonts/font = ExtResource( 3 )
+text = "Settings"
+flat = true
+
+[node name="Quit" type="Button" parent="CenterContainer/Game Paused"]
+margin_top = 143.0
+margin_right = 192.0
+margin_bottom = 182.0
+custom_fonts/font = ExtResource( 3 )
+text = "Quit To Menu"
+flat = true
+
+[node name="Settings" parent="CenterContainer" instance=ExtResource( 4 )]
+editor/display_folded = true
+
+[node name="Label" parent="CenterContainer/Settings" index="0"]
+margin_top = 0.0
+margin_bottom = 33.0
+
+[node name="Control" parent="CenterContainer/Settings" index="1"]
+margin_top = 37.0
+margin_bottom = 53.0
+
+[node name="Master" parent="CenterContainer/Settings" index="2"]
+margin_top = 57.0
+margin_bottom = 90.0
+
+[node name="MasterSlider" parent="CenterContainer/Settings" index="3"]
+margin_top = 94.0
+margin_bottom = 110.0
+ticks_on_borders = false
+
+[node name="Music" parent="CenterContainer/Settings" index="4"]
+margin_top = 114.0
+
+[node name="MusicSlider" parent="CenterContainer/Settings" index="5"]
+ticks_on_borders = false
+
+[node name="SFX" parent="CenterContainer/Settings" index="6"]
+margin_bottom = 204.0
+
+[node name="SFXSlider" parent="CenterContainer/Settings" index="7"]
+margin_top = 208.0
+margin_bottom = 224.0
+ticks_on_borders = false
+
+[node name="Return" parent="CenterContainer/Settings" index="8"]
+margin_top = 228.0
+margin_bottom = 267.0
+[connection signal="pressed" from="CenterContainer/Game Paused/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="CenterContainer/Game Paused/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="CenterContainer/Game Paused/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="CenterContainer/Settings/Return" to="." method="_on_Return_pressed"]
+
+[editable path="CenterContainer/Settings"]

@@ -5,9 +5,6 @@ onready var end_type = $"CanvasLayer/Label Type"
 onready var color_rect = $"CanvasLayer/ColorRect"
 onready var spike = $EndSpikes
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 func _process(delta):
 	var bodies = spike.get_overlapping_bodies();
@@ -33,6 +30,7 @@ func _process(delta):
 				end_label.text = "The End!"
 				end_type.text = "You got: Bad Ending!"
 			ScreenText.get_node("PowerUpText").text = "Thanks for Playing! Press enter to return to menu!";
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_pause"):
 		globals._reset_globals();
+		ScreenText.get_node("PowerUpText").text = "";
 		get_tree().change_scene("res://SCENES/Menu.tscn");
